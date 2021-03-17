@@ -1,0 +1,62 @@
+START_GAME
+ptr map
+ptr room1
+ptr player
+int roomNumber = 0
+int number = -6
+const str getLevel = "Enter difficulty level: "
+const float difficult = 2.5
+roomNumber++
+roomNumber = number / roomNumber
+roomNumber *= -2
+number /= -3
+roomNumber %= number
+roomNumber ^= number
+
+bool dummyBool = false
+dummyBool = 0
+dummyBool = 1
+dummyBool = true
+dummyBool = dummyBool and dummyBool
+dummyBool = dummyBool or dummyBool
+dummyBool = not dummyBool
+dummyBool = (3 < 5)
+dummyBool  = (roomNumber == 0)
+dummyBool  = (roomNumber >= 0)
+dummyBool  = (roomNumber <= 0)
+dummyBool  = (roomNumber < 0)
+dummyBool  = (roomNumber > 0)
+dummyBool  = (roomNumber != 0)
+
+map = CREATE_MAP (roomNumber)
+room1 = ADD_ROOM(map, -10, 0 , 5)
+
+int difficultLevel;
+for(int i = 0; i < difficultLevel; i++)[
+	ADD_MONSTER(room1, 10, 10)
+]
+
+player = CREATE_PLAYER(room1, 100, 10)
+
+if(dummyBool)
+[
+	FIGHT_MONSTER()
+]
+else[
+	EAT_FOOD()
+]
+
+float dummyFunc()[
+	write getLevel
+read difficultLevel
+return difficultLevel * difficult
+]
+
+
+char yesOrNo;
+void wasFun()[
+	write "Did you have fun (y/n)"
+	read yesOrNo
+]
+
+END_GAME

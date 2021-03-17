@@ -1,0 +1,127 @@
+START_GAME
+#This is an example program for the MARS language that shows basic structures.
+
+ptr map
+map = CREATE_MAP (5)
+
+ptr room1
+ptr room2
+ptr room3
+ptr room4
+ptr room5
+
+#adding rooms to the map with coordinate numbers
+room1 = ADD_ROOM(map, -10, 0 , 5)
+room2 = ADD_ROOM(map, -5, 0 , 5)
+room3 = ADD_ROOM(map, 0, 0 , 5)
+room4 = ADD_ROOM(map, 5, 0 , 5)
+room5 = ADD_ROOM(map, 10, 0 , 5)
+
+#adding doors to the rooms
+ptr door1 
+ptr door2 
+ptr door3 
+ptr door4 
+ptr door5 
+door1 = ADD_DOOR(room1, 2.5 , 0)
+door2 = ADD_DOOR(room2, 2.5 , 0)
+door3 = ADD_DOOR(room3, 2.5 , 0)
+door4 = ADD_DOOR(room4, 2.5 , 0)
+door5 = ADD_DOOR(room5, 2.5 , 0)
+
+#adding a treasure to room1 with 10 coins
+ptr trsr1
+trsr1 = ADD_TREASURE(room1, 10)
+
+#adding a treasure to room2 with 20 coins
+ptr trsr2 
+trsr2 = ADD_TREASURE(room2, 20)
+
+#adding a treasure to room3 with 30 coins
+ptr trsr3
+trsr3 = ADD_TREASURE(room3, 30)
+
+#adding a treasure to room4 with 40 coins
+ptr trsr4 
+trsr4 = ADD_TREASURE(room4, 40)
+
+#adding a treasure to room5 with 50 coins
+ptr trsr5 
+trsr5 = ADD_TREASURE(room5, 50)
+
+#adding a monster to room1 with 100 live and 5 strength
+ptr mnstr1
+mnstr1 = ADD_MONSTER(room1, 100, 5)
+
+#adding a monster to room2 with 100 lives and 10 strength
+ptr mnstr2 
+mnstr2 = ADD_MONSTER(room2, 100, 10)
+
+#adding a monster to room3 with 100 lives and 15 strength
+ptr mnstr3 
+mnstr3 = ADD_MONSTER(room3, 100, 15)
+
+#adding a monster to room4 with 100 lives and 20 strength
+ptr mnstr4 
+mnstr4 = ADD_MONSTER(room4, 100, 20)
+
+#adding a monster to room5 with 100 lives and 25 strength
+ptr mnstr5
+mnstr5 = ADD_MONSTER(room5, 100, 25)
+
+ptr player;
+player = CREATE_PLAYER(room1, 100, 10);
+
+bool isDead
+bool isQuit
+isDead = IS_PLAYER_DEAD()
+ifQuit = IF_QUIT()
+
+int health;
+int strength;
+int wealth;
+
+while( (not isDead) and (not isQuit) )
+[
+	ptr currentRoomPtr
+	health = GET_PLAYER_HEALTH()
+	strength = GET_PLAYER_STRENGTH()
+	wealth = GET_PLAYER_WEALTH()
+	write "Player's health is "
+	write health
+	write "Player's strength is "
+	write strength
+	write "Player's wealth is "
+	write wealth
+	write "\n"
+	
+	currentRoomPtr = GET_CURRENT_ROOM()
+	int monsterCnt
+	int treasureCnt
+	monsterCnt = GET_ROOM_CONTENTS_MONSTER(currentRoomPtr)
+	treasureCnt = GET_ROOM_CONTENTS_TREASURES(currentRoomPtr)
+	write "Current room is "
+	write currentRoomPtr 
+write "There are " 
+write monsterCnt 
+write  " in room " 
+write currentRoomPtr;
+
+	write "There are " 
+write treasureCnt
+write  " in room " 
+write currentRoomPtr
+write "\n"
+
+MOVE(player, 5, 0)
+PICK_TREASURE()
+FIGTH_MONSTER(currentRoomPtr)
+EAT_FOOD()
+USE_TOOLS()
+BUY()
+isDead = IS_PLAYER_DEAD()
+ifQuit = IF_QUIT()
+]
+write 2*wealth+3*strength
+
+END_GAME
