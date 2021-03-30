@@ -1,0 +1,251 @@
+START_GAME
+#first test program
+#initialize map with 5 rooms
+
+ptr map;
+map = CREATE_MAP(5);
+
+ptr room1;
+ptr room2;
+ptr room3;
+ptr room4;
+ptr room5;
+
+room1 = ADD_ROOM(10, 0 , 5);
+room2 = ADD_ROOM(20, 0 , 5);
+room3 = ADD_ROOM(30, 0 , 5);
+room4 = ADD_ROOM(40, 0 , 5);
+room5 = ADD_ROOM(50, 0 , 5);
+
+#creating doors for the rooms
+
+ptr door1;
+ptr door2;
+ptr door3;
+ptr door4;
+ptr door5;
+door1 = ADD_DOOR(room1, 5);
+door2 = ADD_DOOR(room2, 10);
+door3 = ADD_DOOR(room3, 15);
+door4 = ADD_DOOR(room4, 20);
+door5 = ADD_DOOR(room5, 25);
+
+#adding mines through the map for the player to find
+
+ptr trsr1;
+trsr1 = ADD_MINE(room1, 10, 1);
+
+ptr trsr2;
+trsr2 = ADD_MINE(room2, 20, 2);
+
+ptr trsr3;
+trsr3 = ADD_MINE(room3, 30, 3);
+
+ptr trsr4;
+trsr4 = ADD_MINE(room4, 40, 4);
+
+ptr trsr5;
+trsr5 = ADD_MINE(room5, 50, 5);
+
+#adding aliens to the map for the player to fight
+
+ptr mnstr1;
+mnstr1 = ADD_ALIEN(room1, 100, 5);
+
+ptr mnstr2;
+mnstr2 = ADD_ALIEN(room2, 100, 10);
+
+ptr mnstr3;
+mnstr3 = ADD_ALIEN(room3, 100, 15);
+
+ptr mnstr4;
+mnstr4 = ADD_ALIEN(room4, 100, 20);
+
+ptr mnstr5;
+mnstr5 = ADD_ALIEN(room5, 100, 25);
+
+#initializing the player
+
+ptr player;
+player = CREATE_PLAYER(room1, 100, 10);
+
+bool isDead;
+bool ifQuit;
+isDead = IS_PLAYER_DEAD();
+ifQuit = IF_QUIT();
+int health;
+int strength;
+int wealth;
+health = GET_PLAYER_HEALTH();
+strength = GET_PLAYER_STRENGTH();
+wealth = GET_PLAYER_WEALTH();
+write health;
+write strength;
+write wealth;
+int super = 1000;
+
+#if the player is able to move and fight
+
+while( health > super )
+[
+MINE_WEST();
+PICK_WEST();
+FIGTH_ALIEN();
+EAT_FOOD();
+USE_TOOLS(hammer);
+BUY(strawberry);
+isDead = IS_PLAYER_DEAD();
+if(isDead)[
+health = 0;
+];
+result = 2*wealth + 3*strength;
+write result;
+];
+
+#second test program
+#initializing the map, player and other features
+
+ptr map;
+ptr room1;
+ptr player;
+int roomNumber = 0;
+int number = -6;
+const str getLevel = "Enter difficulty level: ";
+const float difficult = 2.5;
+roomNumber = number / roomNumber;
+roomNumber *= -2;
+number /= -3;
+roomNumber %= number;
+roomNumber ^= number;
+bool dummyBool = false;
+dummyBool = 0;
+dummyBool = 1;
+dummyBool = true;
+dummyBool = dummyBool and dummyBool;
+dummyBool = dummyBool or dummyBool;
+dummyBool = not (dummyBool);
+dummyBool = number < 5;
+
+int strength = 1000;
+int wealth = 1000;
+int health = 1000;
+
+map = CREATE_MAP (5);
+room1 = ADD_ROOM(10, 0 , 5);
+
+int difficultLevel;
+for(int i = 0; i < difficultLevel; i++)[
+	ADD_ALIEN(room1, 10, 10);
+];
+
+isDead = IS_PLAYER_DEAD();
+
+#if player is alive then s/he will first attack an alien on the east then will find the mine
+
+if(not (isDead))[
+ATTACK_EAST();
+MINE_EAST();
+PICK_EAST();
+];
+
+player = CREATE_PLAYER(room1, 100, 10);
+int dim1 = 5;
+int dim2 = 4; 
+for(int i = 0; i < dim1; i++)[
+for(int j = 0; j < dim2; j++)[
+		ATTACK_SOUTHWEST();
+		MINE_SOUTHWEST();
+		bool hasMoney = wealth < 10;
+		if(hasMoney)[
+			PICK_SOUTHWEST();
+		];
+	];
+	MOVE(player, -1, +1);
+];
+
+#player acting randomly
+
+if(dummyBool)
+[
+	FIGHT_ALIEN();
+strength -= 10;
+]
+else[
+	EAT_FOOD();
+	strength *= 3;
+	health *= 10;
+];
+
+float func level()[
+	write getLevel;
+read difficultLevel;
+return difficultLevel * difficult ; 
+];
+
+#if the user wants to be the ultimate champion
+
+void func ultimateChampion(ptr player)[
+	while(strength > 100)[
+		MOVE_NORTH();
+		ATTACK_SOUTH();
+		strength = GET_PLAYER_STRENGTH();
+		bool stillChamp = strength > 50;
+		if(not (stillChamp))[
+			BUY(captainAmericaShield);
+			strength *= 10;
+]
+else[
+	MOVE_NORTHWEST();
+	ATTACK_NORTHWEST();
+	FIGHT_ALIEN();
+	USE_TOOL(AnakinLightSaber);
+	strength /= 10;
+	];
+	levelUltimate = level();
+	toBeUltimate = levelUltimate * strength;
+bool goMore = toBeUltimate >= levelUltimate;
+if(goMore)[
+	for(int i = 0; i < 5; i++)[
+		MOVE_EAST();
+	];
+ ];
+strength /= 20;
+	];
+];
+new_strength = GET_PLAYER_STRENGTH();
+bool soPowerful = new_strength > 50;
+
+if(soPowerful )[
+	ATTACK_NORTHWEST();
+	strength /= 3;
+
+]
+else[
+	EAT_FOOD();
+	BUY(thorHAMMER);
+	strength *= 3;
+];
+
+health = GET_PLAYER_HEALTH();
+void func printplayerhealth(int health)[
+	str comment = "Player's health is ";
+	write comment;
+	write health;
+];
+
+printplayerhealth();
+#get player’s opinion about the game
+
+char yesOrNo;
+void func wasFun()[
+	write "Did you have fun (y/n)";
+	read yesOrNo;
+];
+
+wasFun();
+END_GAME
+
+
+
+
+
